@@ -17,8 +17,10 @@ def test_can_show_a_relevant_code_snippet(browser):
     # Jan visits the site
     browser.get('http://localhost:8000')
 
-    # He notices the title references the site name
+    # He notices the title and header reference the site name
     site_name = 'Scout'
-    assert site_name.lower() in browser.title.lower()
+    assert site_name in browser.title
+    header_text = browser.find_element_by_tag_name('h1').text
+    assert site_name in header_text
 
     assert False, 'incomplete test'
