@@ -26,7 +26,7 @@ def test_can_show_a_relevant_code_snippet(browser):
 
     # He is invited to search for code snippets
     expected_search_prompt = 'Enter some code-related keywords'
-    search_box = browser.find_element_by_id('search_box')
+    search_box = browser.find_element_by_id('id_search_box')
     actual_search_prompt = search_box.get_attribute('placeholder')
     assert actual_search_prompt == expected_search_prompt
 
@@ -39,5 +39,5 @@ def test_can_show_a_relevant_code_snippet(browser):
     # (the highest-voted python page on StackOverflow.com is
     #  /questions/231767/what-does-the-yield-keyword-do-in-python)
     snippets = browser.find_elements_by_tag_name('code')
-    assert any('mylist' in snippet and 'mygenerator' in snippet
-               for snippet in snippets)
+    assert any(['mylist' in snippet.text and 'mygenerator' in snippet.text
+                for snippet in snippets])
