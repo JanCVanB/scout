@@ -1,5 +1,6 @@
-from selenium import webdriver
 import pytest
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 
 @pytest.fixture(scope='function')
@@ -29,4 +30,14 @@ def test_can_show_a_relevant_code_snippet(browser):
     actual_search_prompt = search_box.get_attribute('placeholder')
     assert actual_search_prompt == expected_search_prompt
 
-    assert False, 'incomplete test'
+    # He searches "python yield"
+    search_box.send_keys('python yield')
+    search_box.send_keys(Keys.ENTER)
+
+    # The page updates, and now the page shows a code snippet
+    # that uses the dummy variables "mylist" and "mygenerator"
+    # (the highest-voted python page on StackOverflow.com is
+    #  /questions/231767/what-does-the-yield-keyword-do-in-python)
+    snippets = browser.find_elements_by_tag_name('code')
+    assert any('mylist' in snippet and 'mygenerator' in snippet
+               for snippet in snippets)
