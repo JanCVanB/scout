@@ -14,6 +14,11 @@ def browser(request):
 
 
 def test_can_show_a_relevant_code_snippet(browser):
+    # Jan visits the site
     browser.get('http://localhost:8000')
 
-    assert 'Django' in browser.title
+    # He notices the title references the site name
+    site_name = 'Scout'
+    assert site_name.lower() in browser.title.lower()
+
+    assert False, 'incomplete test'
