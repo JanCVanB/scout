@@ -1,1 +1,1 @@
-web: waitress-serve --port=$PORT metro.wsgi:application
+web: waitress-serve --port=$PORT scout.wsgi:application
