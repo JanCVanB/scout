@@ -23,4 +23,10 @@ def test_can_show_a_relevant_code_snippet(browser):
     header_text = browser.find_element_by_tag_name('h1').text
     assert site_name in header_text
 
+    # He is invited to search for code snippets
+    expected_search_prompt = 'Enter some code-related keywords'
+    search_box = browser.find_element_by_id('search_box')
+    actual_search_prompt = search_box.get_attribute('placeholder')
+    assert actual_search_prompt == expected_search_prompt
+
     assert False, 'incomplete test'
