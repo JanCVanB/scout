@@ -7,8 +7,11 @@
 <body>
 
     <h1>Scout</h1>
-    <input type="text" id="search_box"
-           placeholder="Enter some code-related keywords">
+    <form method="post">
+        <input name="search_text" id="id_search_box"
+               placeholder="Enter some code-related keywords">
+        {% csrf_token %}
+    </form>
 
 </body>
 </html>
