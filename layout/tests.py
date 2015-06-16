@@ -18,3 +18,17 @@ class HomePageTest(TestCase):
         response = home(request)
         actual_html = response.content.decode()
         self.assertEqual(actual_html, expected_html)
+
+    def test_home_page_can_save_a_POST_request(self):
+        query = 'python yield'
+        expected_html = render_to_string(
+            'home.html',
+            {'query': query}
+        )
+        request = HttpRequest()
+        request.method = 'POST'
+        request.POST['query'] = query
+        response = home(request)
+        actual_html = response.content.decode()
+        self.assertIn(query, actual_html)
+        self.assertEqual(actual_html, expected_html)

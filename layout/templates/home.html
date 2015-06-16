@@ -7,11 +7,14 @@
 <body>
 
     <h1>Scout</h1>
-    <form method="post">
-        <input name="search_text" id="id_search_box"
-               placeholder="Enter some code-related keywords">
+
+    <form method="POST">
+        <input name="query" id="id_search_box"
+               placeholder="Search for code snippets">
         {% csrf_token %}
     </form>
+
+    <h2>{{ query }}</h2>
 
     <code>
         mylist mygenerator

@@ -1,5 +1,11 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 
 def home(request):
-    return render(request, 'home.html')
+    return render(
+        request, 'home.html',
+        {
+            'query': request.POST.get('query', ''),
+        }
+    )
