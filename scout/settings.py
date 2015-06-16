@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import dj_database_url
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -76,9 +77,13 @@ WSGI_APPLICATION = 'scout.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-import dj_database_url
+ON_HEROKU = os.environ.get('ON_HEROKU')
+if ON_HEROKU:
+    DATABASE_URL = 'postgresql://postgresql'
+else:
+    DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': dj_database_url.config(default=DATABASE_URL)
 }
 
 
