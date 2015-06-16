@@ -8,8 +8,10 @@ def test_get_relevant_stack_overflow_answers_empty_query_gets_empty_snippets():
     assert actual_answers == expected_answers
 
 
-def test_get_relevant_stack_overflow_answers_any_query_gets_dummy_snippets():
-    expected_answers = 'answer 1', 'answer 2'
-    query = 'any text'
-    actual_answers = get_relevant_stack_overflow_answers(query)
-    assert actual_answers == expected_answers
+def test_get_relevant_stack_overflow_answers_returns_best_answer_first():
+    queries = 'python yield', 'java static', 'c++'
+    best_answer_keywords = 'mygenerator', 'enclosing', 'prediction'
+    for query, best_answer_keyword in zip(queries, best_answer_keywords):
+        answers = get_relevant_stack_overflow_answers(query)
+        best_answer = answers[0]
+        assert best_answer_keyword in best_answer
