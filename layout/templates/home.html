@@ -16,9 +16,13 @@
 
     <h2>{{ query }}</h2>
 
-    <code>
-        mylist mygenerator
-    </code>
+    {% for snippet in snippets %}
+    <p>
+        <code>
+            {{ snippet }}
+        </code>
+    </p>
+    {% endfor %}
 
 </body>
 </html>

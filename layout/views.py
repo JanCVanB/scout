@@ -1,11 +1,15 @@
-from django.http import HttpResponse
 from django.shortcuts import render
+
+from search import get_snippets
 
 
 def home(request):
+    query = request.POST.get('query', '')
+    snippets = get_snippets(query)
     return render(
         request, 'home.html',
         {
-            'query': request.POST.get('query', ''),
+            'query': query,
+            'snippets': snippets,
         }
     )

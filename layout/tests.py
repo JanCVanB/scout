@@ -4,6 +4,7 @@ from django.template.loader import render_to_string
 from django.test import TestCase
 
 from layout.views import home
+from search import get_snippets
 
 
 class HomePageTest(TestCase):
@@ -21,9 +22,13 @@ class HomePageTest(TestCase):
 
     def test_home_page_can_save_a_POST_request(self):
         query = 'python yield'
+        snippets = get_snippets(query)
         expected_html = render_to_string(
             'home.html',
-            {'query': query}
+            {
+                'query': query,
+                'snippets': snippets,
+            }
         )
         request = HttpRequest()
         request.method = 'POST'
