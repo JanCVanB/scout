@@ -18,10 +18,9 @@
 
     {% for snippet in snippets %}
     <p>
-        <code>
-            {{ snippet }}
-        </code>
+        {{ snippet | safe }}
     </p>
+    <hr>
     {% endfor %}
 
 </body>
